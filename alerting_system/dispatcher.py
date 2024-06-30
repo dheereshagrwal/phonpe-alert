@@ -8,9 +8,7 @@ class DispatchService:
     @staticmethod
     def dispatch(alert: Alert):
         for strategy in alert.dispatch_strategy_list:
-            dispatch_type = DispatchType(
-                strategy.type
-            )  # Determine the type of dispatch
+            dispatch_type = strategy.type
             match dispatch_type:
                 case DispatchType.CONSOLE:
                     ConsoleDispatch.dispatch(strategy.message)
