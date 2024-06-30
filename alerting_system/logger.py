@@ -10,9 +10,6 @@ class Logger:
             cls._instance = super().__new__(cls, *args, **kwargs)
         return cls._instance
 
-    def __init__(self):
-        pass
-
     def log(self, level: LogLevel, message: str):
         level_str = ""
         match level:

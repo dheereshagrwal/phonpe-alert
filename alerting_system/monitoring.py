@@ -1,8 +1,8 @@
 from datetime import datetime, timedelta
 from alerting_system.logger import Logger
 from literals.enums import AlertType, EventStatus, TextFormatType
-from alerting_system.event import Event
-from alerting_system.config import Alert
+from models.event import Event
+from config.config import Alert
 from alerting_system.dispatcher import DispatchService
 from constants.alert_configs import ALERT_CONFIGS
 
@@ -19,9 +19,6 @@ class MonitoringService:
         if not cls._instance:
             cls._instance = super().__new__(cls)
         return cls._instance
-
-    def __init__(self):
-        pass
 
     # Log information messages for event processing
     def log_info_message(self, event: Event, alert: Alert, message_type: EventStatus):

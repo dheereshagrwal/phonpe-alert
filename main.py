@@ -1,6 +1,6 @@
 from collections import deque
 from datetime import datetime
-from alerting_system.event import Event
+from models.event import Event
 from alerting_system.monitoring import MonitoringService
 from literals.counts import (
     LOGIN_FAILURE_COUNT,

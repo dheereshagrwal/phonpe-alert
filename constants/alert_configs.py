@@ -1,4 +1,4 @@
-from alerting_system.config import Alert, AlertConfig, DispatchStrategy
+from config.config import Alert, AlertConfig, DispatchStrategy
 from alerting_system.logger import Logger
 from literals.enums import AlertType, EventType, DispatchType, TextFormatType
 from literals.counts import (
