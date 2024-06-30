@@ -1,6 +1,8 @@
 from alerting_system.config import Alert
-from literals.enums import DispatchType
-from utils.logs_formatter import get_bold, get_info_color, get_warn_color
+from alerting_system.logger import Logger
+from literals.enums import DispatchType, TextFormatType
+
+logger = Logger()
 
 
 # Service to handle dispatching alerts based on different strategies
@@ -20,14 +22,14 @@ class DispatchService:
 class ConsoleDispatch:
     @staticmethod
     def dispatch(message: str):
-        print(f"{get_info_color('[INFO]')} AlertingService: Dispatching to Console")
-        print(f"{get_warn_color('[WARN]')} Alert: `{message}`")
+        logger.info("AlertingService: Dispatching to Console")
+        logger.warning(f"Alert: {message}")
 
 
 # Class to handle email dispatching of alerts
 class EmailDispatch:
     @staticmethod
     def dispatch(subject: str, message: str):
-        print(
-            f"{get_info_color('[INFO]')} AlertingService: {get_bold('Dispatching an Email')}\nSubject: {subject}\nMessage: {message}"
+        logger.info(
+            f"AlertingService: {logger.get_formatted_text('Dispatching an Email', TextFormatType.BOLD)}\nSubject: {subject}\nMessage: {message}"
         )

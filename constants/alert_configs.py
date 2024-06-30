@@ -1,5 +1,6 @@
 from alerting_system.config import Alert, AlertConfig, DispatchStrategy
-from literals.enums import AlertType, EventType, DispatchType
+from alerting_system.logger import Logger
+from literals.enums import AlertType, EventType, DispatchType, TextFormatType
 from literals.counts import (
     LOGIN_FAILURE_COUNT,
     PAYMENT_EXCEPTION_COUNT,
@@ -19,6 +20,7 @@ from literals.messages import (
     USERSERVICE_EXCEPTION_EMAIL_SUBJECT,
 )
 
+logger = Logger()
 alert_configs = [
     Alert(
         client="X",
@@ -30,7 +32,10 @@ alert_configs = [
         ),
         dispatch_strategy_list=[
             DispatchStrategy(
-                type=DispatchType.CONSOLE, message=PAYMENT_EXCEPTION_CONSOLE_MESSAGE
+                type=DispatchType.CONSOLE,
+                message=logger.get_formatted_text(
+                    PAYMENT_EXCEPTION_CONSOLE_MESSAGE, TextFormatType.BOLD
+                ),
             ),
             DispatchStrategy(
                 type=DispatchType.EMAIL,
@@ -50,7 +55,9 @@ alert_configs = [
         dispatch_strategy_list=[
             DispatchStrategy(
                 type=DispatchType.CONSOLE,
-                message=USERSERVICE_EXCEPTION_CONSOLE_MESSAGE,
+                message=logger.get_formatted_text(
+                    USERSERVICE_EXCEPTION_CONSOLE_MESSAGE, TextFormatType.BOLD
+                ),
             ),
             DispatchStrategy(
                 type=DispatchType.EMAIL,
@@ -67,7 +74,10 @@ alert_configs = [
         ),
         dispatch_strategy_list=[
             DispatchStrategy(
-                type=DispatchType.CONSOLE, message=LOGIN_FAILURE_CONSOLE_MESSAGE
+                type=DispatchType.CONSOLE,
+                message=logger.get_formatted_text(
+                    LOGIN_FAILURE_CONSOLE_MESSAGE, TextFormatType.BOLD
+                ),
             ),
             DispatchStrategy(
                 type=DispatchType.EMAIL,

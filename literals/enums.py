@@ -33,3 +33,22 @@ class EventStatus(Enum):
 
     def __str__(self):
         return self.name.lower()
+
+
+class LogLevel(Enum):
+    DEBUG = auto()
+    INFO = auto()
+    WARNING = auto()
+    ERROR = auto()
+
+    def __str__(self):
+        return self.name
+
+
+class TextFormatType(Enum):
+    BOLD = auto()
+    ITALIC = auto()
+    UNDERLINE = auto()
+
+    def __str__(self):
+        return self.name.lower()

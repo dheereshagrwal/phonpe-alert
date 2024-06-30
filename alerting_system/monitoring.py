@@ -1,9 +1,11 @@
 from datetime import datetime, timedelta
-from literals.enums import AlertType, EventStatus
+from alerting_system.logger import Logger
+from literals.enums import AlertType, EventStatus, TextFormatType
 from alerting_system.event import Event
 from alerting_system.config import Alert
 from alerting_system.dispatcher import DispatchService
-from utils.logs_formatter import get_bold, get_info_color
+
+logger = Logger()
 
 
 # Service to monitor events and trigger alerts
@@ -14,11 +16,9 @@ class MonitoringService:
 
     # Log information messages for event processing
     def log_info_message(self, event: Event, alert: Alert, message_type: EventStatus):
-        message = (
-            f"{get_info_color('[INFO]')} MonitoringService: Client {event.client} {event.type} "
-            f"{alert.alert_config.type} {message_type}"
+        logger.info(
+            f"MonitoringService: Client {event.client} {event.type} {alert.alert_config.type} {message_type}"
         )
-        print(message)
 
     # Monitor incoming events
     def monitor_event(self, event: Event):
@@ -89,7 +89,7 @@ class MonitoringService:
 
     # Trigger the alert and dispatch it
     def trigger_alert(self, alert: Alert):
-        print(
-            f"{get_info_color('[INFO]')} MonitoringService: Client {alert.client} {alert.event_type} {get_bold('threshold breached')}"
+        logger.info(
+            f"MonitoringService: Client {alert.client} {alert.event_type} {logger.get_formatted_text('threshold breached', TextFormatType.BOLD)}"
         )
         DispatchService.dispatch(alert)
