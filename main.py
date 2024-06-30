@@ -7,13 +7,12 @@ from literals.counts import (
     PAYMENT_EXCEPTION_COUNT,
     USERSERVICE_EXCEPTION_COUNT,
 )
-from constants.alert_configs import alert_configs
 from literals.enums import EventType
 
 
 def main():
     # Initialize monitoring service
-    monitoring_service = MonitoringService(alert_configs)
+    monitoring_service = MonitoringService()
 
     # Initialize a deque for events
     events = deque()

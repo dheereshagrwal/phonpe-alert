@@ -21,7 +21,7 @@ from literals.messages import (
 )
 
 logger = Logger()
-alert_configs = [
+ALERT_CONFIGS = [
     Alert(
         client="X",
         event_type=EventType.PAYMENT_EXCEPTION,

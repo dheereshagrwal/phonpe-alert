@@ -4,15 +4,24 @@ from literals.enums import AlertType, EventStatus, TextFormatType
 from alerting_system.event import Event
 from alerting_system.config import Alert
 from alerting_system.dispatcher import DispatchService
+from constants.alert_configs import ALERT_CONFIGS
 
 logger = Logger()
 
 
 # Service to monitor events and trigger alerts
 class MonitoringService:
-    def __init__(self, alert_configs: list[Alert]):
-        self.alert_configs: list[Alert] = alert_configs  # List of alert configurations
-        self.event_history: list[Event] = []  # History of events
+    _instance = None
+    alert_configs = ALERT_CONFIGS
+    event_history: list[Event] = []
+
+    def __new__(cls):
+        if not cls._instance:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
+    def __init__(self):
+        pass
 
     # Log information messages for event processing
     def log_info_message(self, event: Event, alert: Alert, message_type: EventStatus):

@@ -5,31 +5,29 @@ from literals.enums import DispatchType, TextFormatType
 logger = Logger()
 
 
-# Service to handle dispatching alerts based on different strategies
 class DispatchService:
+    class ConsoleDispatch:
+        @staticmethod
+        def dispatch(message: str):
+            logger.info(
+                f"AlertingService: {logger.get_formatted_text('Dispatching to Console', TextFormatType.BOLD)}"
+            )
+            logger.warning(f"Alert: {message}")
+
+    class EmailDispatch:
+        @staticmethod
+        def dispatch(subject: str, message: str):
+            logger.info(
+                f"AlertingService: {logger.get_formatted_text('Dispatching an Email', TextFormatType.BOLD)}\nSubject: {subject}\nMessage: {message}"
+            )
+
     @staticmethod
     def dispatch(alert: Alert):
         for strategy in alert.dispatch_strategy_list:
             dispatch_type = strategy.type
-            match dispatch_type:
-                case DispatchType.CONSOLE:
-                    ConsoleDispatch.dispatch(strategy.message)
-                case DispatchType.EMAIL:
-                    EmailDispatch.dispatch(strategy.subject, strategy.message)
-
-
-# Class to handle console dispatching of alerts
-class ConsoleDispatch:
-    @staticmethod
-    def dispatch(message: str):
-        logger.info("AlertingService: Dispatching to Console")
-        logger.warning(f"Alert: {message}")
-
-
-# Class to handle email dispatching of alerts
-class EmailDispatch:
-    @staticmethod
-    def dispatch(subject: str, message: str):
-        logger.info(
-            f"AlertingService: {logger.get_formatted_text('Dispatching an Email', TextFormatType.BOLD)}\nSubject: {subject}\nMessage: {message}"
-        )
+            if dispatch_type == DispatchType.CONSOLE:
+                DispatchService.ConsoleDispatch.dispatch(strategy.message)
+            elif dispatch_type == DispatchType.EMAIL:
+                DispatchService.EmailDispatch.dispatch(
+                    strategy.subject, strategy.message
+                )
