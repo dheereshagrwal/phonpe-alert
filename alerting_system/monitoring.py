@@ -33,7 +33,7 @@ class MonitoringService:
 
     # Check if the alert threshold is breached
     def check_threshold(self, alert: Alert, event: Event) -> bool:
-        alert_type = AlertType(alert.alert_config.type)
+        alert_type = alert.alert_config.type
         match alert_type:
             case AlertType.SIMPLE_COUNT:
                 return self.check_simple_count(alert)
