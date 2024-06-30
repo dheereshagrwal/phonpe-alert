@@ -4,8 +4,8 @@ from literals.enums import AlertType, DispatchType, EventType
 # Class to configure alerts based on event type and count
 class AlertConfig:
     def __init__(self, type: AlertType, count: int, window_size_in_secs: int = None):
-        self.type = type  # The type of alert (e.g., ERROR, WARNING)
-        self.count = count  # The number of events required to trigger the alert
+        self.type = type  # The type of log (e.g., ERROR, WARNING)
+        self.count = count  # The number of events required to trigger the log
         self.window_size_in_secs = (
             window_size_in_secs  # Optional time window for the count
         )
