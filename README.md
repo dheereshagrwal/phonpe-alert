@@ -13,6 +13,7 @@ This project implements an event monitoring and alerting system. It simulates th
   - `monitoring.py`: Contains the `MonitoringService` class that monitors events and triggers alerts.
   - `dispatcher.py`: Contains classes for dispatching alerts via different strategies.
   - `config.py`: Contains the configuration for alerts.
+  - `logger.py`: Custom logger that supports formatting and color based on log levels.
 - `literals/`
   - `counts.py`: Defines constants for the number of different types of events.
   - `enums.py`: Defines enums for alert types, event types, and dispatch types.
@@ -21,8 +22,7 @@ This project implements an event monitoring and alerting system. It simulates th
   - `alert_configs.py`: Contains the alert configurations.
 - `main.py`: Main file.
 - `output.png`: Sample console screenshot.
-- `utils/`
-  - `logs_formatter.py`: Contains util functions for console formatting.
+
 ## How to Run
 
 1. Clone the repository.
