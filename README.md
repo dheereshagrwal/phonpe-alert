@@ -9,11 +9,14 @@ This project implements an event monitoring and alerting system. It simulates th
 ## Project Structure
 
 - `alerting_system/`
-  - `event.py`: Contains the `Event` class representing an event.
   - `monitoring.py`: Contains the `MonitoringService` class that monitors events and triggers alerts.
-  - `dispatcher.py`: Contains classes for dispatching alerts via different strategies.
+  - `dispatcher.py`: Contains classes for dispatching alerts via different strategies (_singleton_).
+  - `logger.py`: Custom logger that supports formatting and color based on log levels (_singleton_).
+- `models/`
+  - `event.py`: Contains the `Event` class representing an event.
+- `config/`
   - `config.py`: Contains the configuration for alerts.
-  - `logger.py`: Custom logger that supports formatting and color based on log levels.
+
 - `literals/`
   - `counts.py`: Defines constants for the number of different types of events.
   - `enums.py`: Defines enums for alert types, event types, and dispatch types.
@@ -38,7 +41,7 @@ The `main` function simulates the generation of events and processes them using 
 
 ### Explanation
 
-1. **Initialize Monitoring Service:** The `MonitoringService` is initialized with predefined alert configurations.
+1. **Initialize Monitoring Service (_Singleton_):** The `MonitoringService` is initialized with predefined alert configurations.
 2. **Generate Events:** Different types of events are generated for different clients:
    - `PAYMENT_EXCEPTION` events for client X.
    - `USERSERVICE_EXCEPTION` events for client X.
